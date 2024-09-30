@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.nome.label }} {{ form.nome() }}<br>
+    {{ form.descricao.label }} {{ form.descricao() }}<br>
+    {{ form.numero_serie.label }} {{ form.numero_serie() }}<br>
+    {{ form.localizacao.label }} {{ form.localizacao() }}<br>
+    {{ form.submit() }}
+</form>
+{% endblock %}

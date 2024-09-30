@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventário de Ativos</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('routes.listar_ativos') }}">Listar Ativos</a>
+        <a href="{{ url_for('routes.cadastro_ativos') }}">Cadastrar Ativo</a>
+        <a href="{{ url_for('routes.register') }}">Cadastrar Usuário</a> 
+        <a href="{{ url_for('routes.logout') }}">Logout</a>
+        <a href="{{ url_for('routes.cadastrar_sc') }}">Logout</a>
+    </nav>   
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

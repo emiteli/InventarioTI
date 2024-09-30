@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Ativos</h2>
+<ul>
+    {% for ativo in ativos %}
+    <li>{{ ativo.nome }} - {{ ativo.numero_serie }} - {{ ativo.localizacao }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
