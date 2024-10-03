@@ -1,6 +1,7 @@
 from extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime, timezone
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,9 +22,19 @@ class Ativo(db.Model):
     localizacao = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class Fornecedor(db.Model):
+class Patrimonio(db.Model):
+    __tablename__ = 'patrimonios'
+    
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(150), nullable=False)
-    servicos = db.Column(db.String(300))  
-    solicitacoes = db.relationship('SolicitacaoCompra', backref='fornecedor', lazy=True)
+    placa_patrimonio = db.Column(db.String(50), nullable=False)
+    codigo_compra = db.Column(db.String(50), nullable=False)
+    cod_nfe = db.Column(db.String(50), nullable=False)
+    usuario = db.Column(db.String(150), nullable=False)
+    fabricante = db.Column(db.String(100), nullable=False)
+    processador = db.Column(db.String(100), nullable=False)
+    modelo = db.Column(db.String(100), nullable=False)
+    data_cadastro = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    
 
+    def __repr__(self):
+        return f'<Patrimonio {self.placa_patrimonio}>'

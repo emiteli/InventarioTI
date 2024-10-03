@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Cadastrar Patrimônio{% endblock %}
+
+{% block content %}
+<h1>Cadastrar Patrimônio</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.placa_patrimonio.label }} {{ form.placa_patrimonio(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.codigo_compra.label }} {{ form.codigo_compra(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.cod_nfe.label }} {{ form.cod_nfe(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.usuario.label }} {{ form.usuario(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.fabricante.label }} {{ form.fabricante(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.processador.label }} {{ form.processador(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.modelo.label }} {{ form.modelo(class_='form-control') }}
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar Patrimônio</button>
+
+    <button onclick="window.history.back()">Voltar</button>
+</form>
+{% endblock %}

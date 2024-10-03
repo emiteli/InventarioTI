@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import  PasswordField,StringField, FloatField, IntegerField, DateField, BooleanField, SubmitField
+from wtforms import  PasswordField,StringField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Length
 
 
@@ -21,3 +21,12 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField('Confirme a Senha', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Registrar')
 
+class CadastroPatrimonioForm(FlaskForm):
+    placa_patrimonio = StringField('Placa de Patrimônio', validators=[DataRequired(), Length(max=50)])
+    codigo_compra = StringField('Código de Compra', validators=[DataRequired(), Length(max=50)])
+    cod_nfe = StringField('Código da NFe', validators=[DataRequired(), Length(max=50)])
+    usuario = StringField('Usuário', validators=[DataRequired(), Length(max=150)])
+    fabricante = StringField('Fabricante', validators=[DataRequired(), Length(max=100)])
+    processador = StringField('Processador', validators=[DataRequired(), Length(max=100)])
+    modelo = StringField('Modelo', validators=[DataRequired(), Length(max=100)])
+    submit = SubmitField('Cadastrar Patrimônio')

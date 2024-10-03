@@ -1,9 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from extensions import db, login_manager 
-from models.models import User, Ativo, Fornecedor
-from forms.forms import LoginForm, CadastroAtivoForm, RegisterForm
-from flask_login import current_user
+from models.models import User, Ativo, Patrimonio
+from forms.forms import LoginForm, CadastroAtivoForm, RegisterForm, CadastroPatrimonioForm
 
 routes = Blueprint('routes', __name__)
 
@@ -16,7 +15,6 @@ def home():
     if current_user.is_authenticated:
         return redirect(url_for('routes.listar_ativos'))
     return redirect(url_for('routes.login'))
-
 
 @routes.route('/register', methods=['GET', 'POST'])
 def register():
@@ -62,7 +60,8 @@ def cadastro_ativos():
             nome=form.nome.data,
             descricao=form.descricao.data,
             numero_serie=form.numero_serie.data,
-            localizacao=form.localizacao.data
+            localizacao=form.localizacao.data,
+            user_id=current_user.id 
         )
         db.session.add(novo_ativo)
         db.session.commit()
@@ -77,8 +76,28 @@ def listar_ativos():
     ativos = Ativo.query.paginate(page=page, per_page=15)
     return render_template('listar_ativos.html', ativos=ativos)
 
-@routes.route('/listar_fornecedores')
-@login_required
-def listar_fornecedores():
-    fornecedores = Fornecedor.query.all()
-    return render_template('fornecedor/listar_fornecedores.html', fornecedores=fornecedores)
+@routes.route('/cadastrar_patrimonio', methods=['GET', 'POST'])
+@login_required  
+def cadastrar_patrimonio():
+    form = CadastroPatrimonioForm()
+    if form.validate_on_submit():
+        patrimonio = Patrimonio(
+            placa_patrimonio=form.placa_patrimonio.data,
+            codigo_compra=form.codigo_compra.data,
+            cod_nfe=form.cod_nfe.data,
+            usuario=form.usuario.data,
+            fabricante=form.fabricante.data,
+            processador=form.processador.data,
+            modelo=form.modelo.data
+        )
+        db.session.add(patrimonio)
+        db.session.commit()
+        flash('Patrimônio cadastrado com sucesso!', 'success')
+        return redirect(url_for('routes.listar_patrimonios'))
+    return render_template('cadastrar_patrimonio.html', form=form)
+
+@routes.route('/listar_patrimonios')
+@login_required  
+def listar_patrimonios():
+    patrimonios = Patrimonio.query.all()
+    return render_template('listar_patrimonios.html', patrimonios=patrimonios)
