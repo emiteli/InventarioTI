@@ -31,6 +31,9 @@
                             <a class="nav-link" href="{{ url_for('routes.register') }}">Registrar</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('routes.cadastrar_patrimonio') }}">Cadastrar Patrimonio</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('routes.cadastro_ativos') }}">Registrar Ativo</a>
                         </li>
                     {% else %}
@@ -58,8 +61,6 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-                
-
                 {% block content %}{% endblock %}
             </div>
         </div>

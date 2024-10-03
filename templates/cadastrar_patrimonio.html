@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}Cadastrar Patrimônio{% endblock %}
-
 {% block content %}
 <h1>Cadastrar Patrimônio</h1>
 <form method="POST">
@@ -27,7 +26,6 @@
         {{ form.modelo.label }} {{ form.modelo(class_='form-control') }}
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar Patrimônio</button>
-
     <button onclick="window.history.back()">Voltar</button>
 </form>
 {% endblock %}
