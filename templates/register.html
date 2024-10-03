@@ -4,20 +4,20 @@
 <h1>Cadastro</h1>
 <form method="POST">
     {{ form.hidden_tag() }}
-    <div>
+    <div class="form-group">
         {{ form.username.label }}<br>
         {{ form.username(size=32) }}<br>
     </div>
-    <div>
+    <div class="form-group">
         {{ form.password.label }}<br>
         {{ form.password(size=32) }}<br>
     </div>
-    <div>
+    <div class="form-group">
         {{ form.confirm_password.label }}<br>
         {{ form.confirm_password(size=32) }}<br>
     </div>
     <p></p>
-    <button type="submit" class="btn btn-primary"> Cadastrar </button>
-    <button onclick="window.history.back()">Voltar</button>
+    <button type="submit" class="custom-btn"> Cadastrar </button>
+    <button onclick="window.history.back()" class="custom-btn">Voltar</button>
 </form>
 {% endblock %}

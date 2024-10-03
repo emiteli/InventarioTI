@@ -7,11 +7,13 @@
     <title>{% block title %}My Web App{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('routes.home') }}">Minha Aplicação</a>
+            <a class="navbar-brand" href="{{ url_for('routes.home') }}">Inventario Digital Transformation</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,7 +33,7 @@
                             <a class="nav-link" href="{{ url_for('routes.register') }}">Registrar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('routes.cadastrar_patrimonio') }}">Cadastrar Patrimonio</a>
+                            <a class="nav-link" href="{{ url_for('routes.cadastrar_patrimonio') }}">Cadastrar Patrimônio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('routes.cadastro_ativos') }}">Registrar Ativo</a>
@@ -44,6 +46,9 @@
                             <a class="nav-link" href="{{ url_for('routes.register') }}">Registrar</a>
                         </li>
                     {% endif %}
+                    <button id="toggle-dark-mode" class="btn btn-dark">
+                        <i class="fas fa-moon" id="dark-mode-icon"></i>
+                    </button>
                 </ul>
             </div>
         </div>
@@ -71,5 +76,31 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        const darkModeIcon = document.getElementById('dark-mode-icon');
+
+        const currentMode = localStorage.getItem('dark-mode');
+        if (currentMode === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+
+        toggleButton.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkModeIcon.classList.remove('fa-moon');
+                darkModeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkModeIcon.classList.remove('fa-sun');
+                darkModeIcon.classList.add('fa-moon');
+            }
+        });
+    </script>
 </body>
 </html>
