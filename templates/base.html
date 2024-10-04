@@ -27,9 +27,6 @@
                             <a class="nav-link" href="{{ url_for('routes.listar_patrimonios') }}">Patrimônios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('routes.logout') }}">Logout</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('routes.register') }}">Registrar</a>
                         </li>
                         <li class="nav-item">
@@ -37,6 +34,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('routes.cadastro_ativos') }}">Registrar Ativo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('routes.logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
@@ -46,6 +46,15 @@
                             <a class="nav-link" href="{{ url_for('routes.register') }}">Registrar</a>
                         </li>
                     {% endif %}
+
+                    <span class="navbar-text">
+                        {% if current_user.is_authenticated %}
+                            Olá, {{ current_user.username }}
+                        {% else %}
+                            <a href="{{ url_for('routes.login') }}" class="btn btn-outline-success">Login</a>
+                        {% endif %}
+                    </span>
+
                     <button id="toggle-dark-mode" class="btn btn-dark">
                         <i class="fas fa-moon" id="dark-mode-icon"></i>
                     </button>
@@ -102,5 +111,14 @@
             }
         });
     </script>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
 </body>
 </html>

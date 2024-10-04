@@ -18,15 +18,17 @@ class Ativo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
     descricao = db.Column(db.String(300))
-    numero_serie = db.Column(db.String(100), nullable=False)
+    numero_serie = db.Column(db.String(100), nullable=False, unique=True)
     localizacao = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    patrimonio_id = db.Column(db.Integer, db.ForeignKey('patrimonios.id'), nullable=True)
+    patrimonio = db.relationship('Patrimonio', backref='ativo')
 
 class Patrimonio(db.Model):
     __tablename__ = 'patrimonios'
     
     id = db.Column(db.Integer, primary_key=True)
-    placa_patrimonio = db.Column(db.String(50), nullable=False)
+    placa_patrimonio = db.Column(db.String(50), nullable=False, unique=True)
     codigo_compra = db.Column(db.String(50), nullable=False)
     cod_nfe = db.Column(db.String(50), nullable=False)
     usuario = db.Column(db.String(150), nullable=False)
@@ -35,6 +37,5 @@ class Patrimonio(db.Model):
     modelo = db.Column(db.String(100), nullable=False)
     data_cadastro = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     
-
     def __repr__(self):
         return f'<Patrimonio {self.placa_patrimonio}>'

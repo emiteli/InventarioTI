@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h1>Cadastro De Ativo</h1>
-<form method="POST">
-    {{ form.hidden_tag() }}<br>
+
+<h1>Cadastro</h1>
+
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
     <div class="form-group">
-        {{ form.nome.label }}<br>
-        {{ form.nome() }}<br>
+        {{ form.nome.label }} {{ form.nome(size=32, class="form-control") }}
     </div>
     <div class="form-group">
-        {{ form.descricao.label }}<br>
-        {{ form.descricao() }}<br>
+        {{ form.descricao.label }} {{ form.descricao(size=32, class="form-control") }}
     </div>
     <div class="form-group">
-        {{ form.numero_serie.label }}<br>
-        {{ form.numero_serie() }}<br>
+        {{ form.numero_serie.label }} {{ form.numero_serie(size=32, class="form-control") }}
     </div>
     <div class="form-group">
-        {{ form.localizacao.label }} <br>
-        {{ form.localizacao() }}<br>
+        {{ form.localizacao.label }} {{ form.localizacao(size=32, class="form-control") }}
     </div>
-    <p></p>
-    <button type="submit" class="custom-btn"> Cadastrar </button>
-    <button onclick="window.history.back()" class="custom-btn">Voltar</button>
+    <div class="form-group">
+        {{ form.patrimonio_id.label }} {{ form.patrimonio_id(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
 </form>
+
 {% endblock %}

@@ -18,7 +18,6 @@ p, td, th, button {
     font-weight: 400;
 }
 
-
 button.custom-btn {
     background-color: #007bff;
     color: white;
@@ -46,7 +45,7 @@ button.custom-btn:hover {
 }
 
 .table-striped tbody tr:nth-of-type(even) {
-    background-color: #e6e6e6;
+    background-color: #d8ccdb;
 }
 
 .table-hover tbody tr:hover {
