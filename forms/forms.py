@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField, SelectField
+from wtforms import PasswordField, StringField, SubmitField, SelectField, FileField
 from wtforms.validators import DataRequired, EqualTo, Length, Optional
 
 class LoginForm(FlaskForm):
@@ -30,3 +30,7 @@ class CadastroPatrimonioForm(FlaskForm):
     processador = StringField('Processador', validators=[DataRequired(message='O processador é obrigatório.'), Length(max=100, message='O processador deve ter no máximo 100 caracteres.')])
     modelo = StringField('Modelo', validators=[DataRequired(message='O modelo é obrigatório.'), Length(max=100, message='O modelo deve ter no máximo 100 caracteres.')])
     submit = SubmitField('Cadastrar Patrimônio')
+
+class UploadFileForm(FlaskForm):
+    file = FileField('Upload Excel', validators=[DataRequired()])
+    submit = SubmitField('Upload')
