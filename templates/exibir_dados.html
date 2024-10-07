@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Exibir Dados de Planilhas{% endblock %}
+
+{% block content %}
+    <h2>Selecione uma Planilha para Visualizar</h2>
+    
+    <form method="POST" action="{{ url_for('routes.exibir_dados') }}">
+        <div class="form-group">
+            <label for="planilha">Escolha a Planilha</label>
+            <select name="planilha" id="planilha" class="form-control">
+                {% for file in planilhas_disponiveis %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Exibir Dados</button>
+    </form>
+
+    {% if df_filtered is not none %}
+        <h3 class="mt-5">Dados da Planilha Selecionada</h3>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th>Filial</th>
+                  <th>Grupo</th>
+                  <th>Classificac.</th>
+                  <th>Código do Bem</th>
+                  <th>Item</th>
+                  <th>Data de Aquisição</th>
+                  <th>Quantidade</th>
+                  <th>Descrição Sint.</th>
+                  <th>Número Placa</th>
+                  <th>Código Fornec.</th>
+                  <th>Loja Fornec.</th>
+                  <th>Nota Fiscal</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for index, row in df_filtered.iterrows() %}
+              <tr>
+                  <td>{{ row['Filial'] }}</td>
+                  <td>{{ row['Grupo'] }}</td>
+                  <td>{{ row['Classificac.'] }}</td>
+                  <td>{{ row['Cod. do Bem'] }}</td>
+                  <td>{{ row['Item'] }}</td>
+                  <td>{{ row['Dt. Aquisição'] }}</td>
+                  <td>{{ row['Quantidade'] }}</td>
+                  <td>{{ row['Descr. Sint.'] }}</td>
+                  <td>{{ row['Num. Placa'] }}</td>
+                  <td>{{ row['Cod. Fornec.'] }}</td>
+                  <td>{{ row['Loja Fornec.'] }}</td>
+                  <td>{{ row['Nota Fiscal'] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
