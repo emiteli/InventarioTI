@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventário de Ativos</title>
+</head>
+<body>
+    <h1>Inventário de Ativos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Filial</th>
+                <th>Código Base Bem</th>
+                <th>Código Item</th>
+                <th>Tipo Ativo</th>
+                <th>Histórico</th>
+                <th>Conta</th>
+                <th>Tipo Depreciação</th>
+                <th>Ativo Origem</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asset in assets %}
+            <tr>
+                <td>{{ asset.filial }}</td>
+                <td>{{ asset.cod_base_bem }}</td>
+                <td>{{ asset.codigo_item }}</td>
+                <td>{{ asset.tipo_ativo }}</td>
+                <td>{{ asset.historico }}</td>
+                <td>{{ asset.conta }}</td>
+                <td>{{ asset.tipo_deprec }}</td>
+                <td>{{ asset.ativo_origem }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
