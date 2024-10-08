@@ -25,6 +25,15 @@
                         <a class="nav-link" href="{{ url_for('routes.listar_ativos') }}">Contabilidade</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('routes.listar_patrimonios') }}">Patrimônios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('routes.cadastrar_patrimonio') }}">Cadastrar Patrimônio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('routes.cadastro_ativos') }}">Registrar Ativo</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('routes.upload_excel') }}">Upload Excel</a>
                     </li>
                     <li class="nav-item">

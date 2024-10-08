@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Ativos</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Número de Série</th>
+            <th>Localização</th>
+            <th>Patrimônio</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ativo in ativos.items %}
+        <tr>
+            <td>{{ ativo.nome }}</td>
+            <td>{{ ativo.numero_serie }}</td>
+            <td>{{ ativo.localizacao }}</td>
+            <td>{{ ativo.patrimonio.placa_patrimonio }}</td>
+            <td>
+                <a href="{{ url_for('routes.editar_ativo', id=ativo.id) }}" class="btn btn-sm btn-primary">Editar</a>
+                <form action="{{ url_for('routes.excluir_ativo', id=ativo.id) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este ativo?')">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">Nenhum ativo encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Paginação -->
+<nav aria-label="Ativos Pagination">
+    <ul class="pagination">
+        {% if ativos.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('routes.listar_ativos', page=ativos.prev_num) }}">Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Anterior</span>
+        </li>
+        {% endif %}
+
+        {% if ativos.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('routes.listar_ativos', page=ativos.next_num) }}">Próximo</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Próximo</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}
+
+===============================================

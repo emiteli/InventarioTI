@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Listar Funcionários{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('routes.exportar_funcionarios') }}" class="btn btn-success mt-4">Exportar para Excel</a>
+<h2>Funcionários</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Departamento</th>
+            <th>Nome</th>
+            <th>Licenças</th>
+            <th>Cargo</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for funcionario in funcionarios %}
+            <tr>
+                <td>{{ funcionario.status }}</td>
+                <td>{{ funcionario.departamento }}</td>
+                <td>{{ funcionario.nome }}</td>
+                <td>{{ funcionario.licencas }}</td>
+                <td>{{ funcionario.cargo }}</td>
+                <td>{{ funcionario.email}}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('routes.alterar_status', funcionario_id=funcionario.id) }}">
+                        {{ form.hidden_tag() }}  <!-- Token CSRF para segurança -->
+                        
+                        <select name="novo_status" class="form-select" required>
+                            <option value="" disabled selected>Selecione o status</option>
+                            <option value="Ativo" {% if funcionario.status == 'Ativo' %}selected{% endif %}>Ativo</option>
+                            <option value="Inativo" {% if funcionario.status == 'Inativo' %}selected{% endif %}>Inativo</option>
+                            <option value="Ferias" {% if funcionario.status == 'Ferias' %}selected{% endif %}>Ferias</option>
+                        </select>
+                        
+                        <button type="submit" class="btn btn-primary mt-2">Alterar Status</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
